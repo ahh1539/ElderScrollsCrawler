@@ -9,9 +9,9 @@ import Hero.Hero;
 import Hero.Mage;
 import Hero.Tank;
 import Hero.Warrior;
-import javafx.embed.swing.JFXPanel;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
+//import javafx.embed.swing.JFXPanel;
+//import javafx.scene.media.Media;
+//import javafx.scene.media.MediaPlayer;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
@@ -70,9 +70,9 @@ public class Game {
             System.out.println("Are you ready to begin your adventure! : y/n");
             String answer = scanner.next();
             if (answer.equals("y")) {
-                System.out.println("You wake up dizzy with a note next to you signed 'good luck', \n" +
-                                   "you are in a dark stone room lit only by a single torch, you hear a voice growing \n" +
-                                   "louder, 'Welcome to my dungeon " + player.getName() + " I look forward to seeing \n" +
+                System.out.println("You wake up dizzy with a note next to you signed 'good luck', you are in a dark \n " +
+                                   "stone room lit only by a single torch, you hear a voice growing louder, \n" +
+                                   " Welcome to my dungeon " + player.getName() + " I look forward to seeing \n" +
                                    "you getting clapped. You see a " + player.getInv().getWeapon().getName() + " you \n" +
                                    "pick it up and begin your journey through this evil lair \n");
                 while (player.isAlive()) {
@@ -80,7 +80,7 @@ public class Game {
                         int i = player.getRoomscleared();
                         if (rooms[i] == rooms[8]) {
                             player.getRoom().makeBoss();
-                            playSound();
+                            //playSound();
                             System.out.println("Welcome to my lair " + player.getName());
                         }
                         System.out.println("You see a " + getEnemy().getName() + " enter 'f' to fight, 'w' to wait, or 'p' to " +
@@ -124,7 +124,7 @@ public class Game {
                     else {
                         player.addCleared();
                         int i = player.getRoomscleared();
-                        System.out.println("Successfully cleared room! Ready to move to next room? : y/n");
+                        System.out.println("\nSuccessfully cleared room! Ready to move to next room? : y/n");
                         String moveRoom = scanner.next();
                         Room[] rooms = dungeon.getRooms();
                         if (moveRoom.equals("y")) {
@@ -155,7 +155,7 @@ public class Game {
                 player = new Tank(startInv, 2,1,16,name, 9, start);
                 break;
             case "w" :
-                player = new Warrior(startInv, 3,1,130,11, name, start);
+                player = new Warrior(startInv, 3,1,13,11, name, start);
                 break;
             default:
                 player = new Warrior(startInv, 3,1,13,11, name, start);
@@ -226,7 +226,7 @@ public class Game {
             }
             if (!enemy.isAlive()) {
                 levelUpCount++;
-                System.out.println(enemy.getName()+" has been defeated!");
+                System.out.println(enemy.getName()+" has been defeated!\n");
 
                 if (enemy instanceof Boss) {
                     System.out.println("After hours of battling monsters you see a dark tunnel with a red lantern next \n" +
@@ -277,13 +277,13 @@ public class Game {
         player.reset();
     }
 
-    public static void playSound() {
-        String song = "lit.mp3";
-        Media hit = new Media(new File(song).toURI().toString());
-        MediaPlayer mediaPlayer = new MediaPlayer(hit);
-        mediaPlayer.play();
-
-    }
+//    public static void playSound() {
+//        String song = "lit.mp3";
+//        Media hit = new Media(new File(song).toURI().toString());
+//        MediaPlayer mediaPlayer = new MediaPlayer(hit);
+//        mediaPlayer.play();
+//
+//    }
 
     private static void collectPotions(Hero player, Enemy enemy) {
         int hp = enemy.getInv().getHealthPotionsAmt();
@@ -312,7 +312,7 @@ public class Game {
 
 
     public static void main(String[] args) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        final JFXPanel fxPanel = new JFXPanel();
+        //final JFXPanel fxPanel = new JFXPanel();
         play();
     }
 
