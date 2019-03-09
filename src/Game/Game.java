@@ -1,14 +1,8 @@
 package Game;
 
-import Dungeon.Dungeon;
-import Dungeon.Room;
-import Enemies.Boss;
-import Enemies.Enemy;
-import Enemies.Zombie;
-import Hero.Hero;
-import Hero.Mage;
-import Hero.Tank;
-import Hero.Warrior;
+import Dungeon.*;
+import Enemies.*;
+import Hero.*;
 //import javafx.embed.swing.JFXPanel;
 //import javafx.scene.media.Media;
 //import javafx.scene.media.MediaPlayer;
@@ -32,7 +26,7 @@ public class Game {
     private static Room[] rooms;
 
 
-    public static void play(){
+    public static void play() {
         Scanner scanner = new Scanner(System.in);
 
 //
@@ -45,12 +39,12 @@ public class Game {
 
 
         System.out.println("||======================================||\n" +
-                           "||   Welcome to Elder Scrolls Crawler   ||\n" +
-                           "|| Made by: Aidan Bohan and Alex Hurley ||\n" +
-                           "||          To play type 'p'            ||\n" +
-                           "||======================================||");
+                "||   Welcome to Elder Scrolls Crawler   ||\n" +
+                "|| Made by: Aidan Bohan and Alex Hurley ||\n" +
+                "||          To play type 'p'            ||\n" +
+                "||======================================||");
         String input = scanner.next();
-        if (input.equals("p")){
+        if (input.equals("p")) {
             System.out.println("What is your characters name? :");
             String name = scanner.next();
             System.out.println("Type h for help with Character classes, or c to continue");
@@ -60,8 +54,7 @@ public class Game {
                 System.out.println("Choose your character class: w for warrior, t for tank, m for mage");
                 String herrooo = scanner.next();
                 player = makeHero(name, herrooo);
-            }
-            else {
+            } else {
 
                 System.out.println("Choose your character class: w for warrior, t for tank, m for mage");
                 String heroClass = scanner.next();
@@ -70,11 +63,11 @@ public class Game {
             System.out.println("Are you ready to begin your adventure! : y/n");
             String answer = scanner.next();
             if (answer.equals("y")) {
-                System.out.println("You wake up dizzy with a note next to you signed 'good luck', you are in a dark \n " +
-                                   "stone room lit only by a single torch, you hear a voice growing louder, \n" +
-                                   " Welcome to my dungeon " + player.getName() + " I look forward to seeing \n" +
-                                   "you getting clapped. You see a " + player.getInv().getWeapon().getName() + " you \n" +
-                                   "pick it up and begin your journey through this evil lair \n");
+                System.out.println("You wake up dizzy with a note next to you signed 'good luck', you are in a dark \n" +
+                        "stone room lit only by a single torch, you hear a voice growing louder, Welcome \n" +
+                        "to my dungeon " + player.getName() + " I look forward to seeing you getting clapped." +
+                        " You see a " + player.getInv().getWeapon().getName() + "\n"+"you pick it up and begin your journey through " +
+                        "this evil lair \n");
                 while (player.isAlive()) {
                     if (!player.getRoom().getEnemies().isEmpty()) {
                         int i = player.getRoomscleared();
@@ -90,17 +83,15 @@ public class Game {
                         if (ans.equals("f")) {
                             System.out.println("BATTLE BEGINS WITH " + getEnemy().getName() + "!!!");
                             battle(player, getEnemy());
-                        }
-                        else if (ans.equals("p")){
-                            if (player.getInv().consumeHPotion()){
-                                    player.increaseHp(5);
-                                    System.out.println("You have taken a potion!");
-                                }
-                                else {
-                                    System.out.println("You have no potions, rip guy...");;
-                                }
-                        }
-                        else {
+                        } else if (ans.equals("p")) {
+                            if (player.getInv().consumeHPotion()) {
+                                player.increaseHp(5);
+                                System.out.println("You have taken a potion!");
+                            } else {
+                                System.out.println("You have no potions, rip guy...");
+                                ;
+                            }
+                        } else {
                             if (player.getRoom().isRoomCleared()) {
                                 System.out.println("Would you like to continue (c) or go back (b)?");
                                 String dir = scanner.next();
@@ -115,13 +106,13 @@ public class Game {
                                     }
                                 }
                             }
-                            if (player.getRoom().isRoomCleared() == false){
-                                System.out.println("You can't progress to the next room without clearing this room!)");}
+                            if (player.getRoom().isRoomCleared() == false) {
+                                System.out.println("You can't progress to the next room without clearing this room!)");
+                            }
 
                         }
 
-                    }
-                    else {
+                    } else {
                         player.addCleared();
                         int i = player.getRoomscleared();
                         System.out.println("\nSuccessfully cleared room! Ready to move to next room? : y/n");
@@ -132,42 +123,42 @@ public class Game {
                         }
                     }
                 }
-            }
-            else {
+            } else {
                 System.out.println("Wrong answer!, goodbye!");
+                scanner.close();
             }
         }
     }
 
-    private static Hero makeHero(String name, String heroType){
+    private static Hero makeHero(String name, String heroType) {
         dungeon = new Dungeon();
         Hero player;
         Weapon weapon = new Weapon("Brick", 1);
-        Inventory startInv = new Inventory(1,1,weapon);
+        Inventory startInv = new Inventory(1, 1, weapon);
         dungeon.makeDungeon(9);
         rooms = dungeon.getRooms();
         Room start = rooms[0];
-        switch (heroType){
-            case "m" :
-                player = new Mage(startInv,4,1, 11, name, 14, start);
+        switch (heroType) {
+            case "m":
+                player = new Mage(startInv, 4, 1, 11, name, 14, start);
                 break;
-            case "t" :
-                player = new Tank(startInv, 2,1,16,name, 9, start);
+            case "t":
+                player = new Tank(startInv, 2, 1, 16, name, 9, start);
                 break;
-            case "w" :
-                player = new Warrior(startInv, 3,1,13,11, name, start);
+            case "w":
+                player = new Warrior(startInv, 3, 1, 13, 11, name, start);
                 break;
             default:
-                player = new Warrior(startInv, 3,1,13,11, name, start);
+                player = new Warrior(startInv, 3, 1, 13, 11, name, start);
         }
         return player;
     }
 
-    private static Enemy getEnemy(){
+    private static Enemy getEnemy() {
         return player.getRoom().getEnemies().get(0);
     }
 
-    private static void battle(Hero player, Enemy enemy){
+    private static void battle(Hero player, Enemy enemy) {
         label:
         while (true) {
             System.out.println();
@@ -176,13 +167,13 @@ public class Game {
                 System.out.println("YOU HAVE DIED.......BETTER LUCK NEXT TIME!!!");
                 break;
             }
-            System.out.println("Health: "+player.getCurrentHp()+"/"+player.getMaxHp()+"\n" +
-                               "Stamina: "+player.getCurrentStamina()+"/"+player.getMaxStamina()+"\n" +
-                               "Attack Damage: "+player.getAttackDamage()+"\n" +
-                               "Weapon: "+player.getInv().getWeapon().getName()+" : "+player.getInv().getWeapon().getDamage()+"\n" +
-                               "Stamina Potions: "+player.getInv().getStamPotionsAmt()+"\n" +
-                               "Health Potions: "+player.getInv().getHealthPotionsAmt()+"\n" +
-                               "Level: "+player.getLevel() + "\n");
+            System.out.println("Health: " + player.getCurrentHp() + "/" + player.getMaxHp() + "\n" +
+                    "Stamina: " + player.getCurrentStamina() + "/" + player.getMaxStamina() + "\n" +
+                    "Attack Damage: " + player.getAttackDamage() + "\n" +
+                    "Weapon: " + player.getInv().getWeapon().getName() + " : " + player.getInv().getWeapon().getDamage() + "\n" +
+                    "Stamina Potions: " + player.getInv().getStamPotionsAmt() + "\n" +
+                    "Health Potions: " + player.getInv().getHealthPotionsAmt() + "\n" +
+                    "Level: " + player.getLevel() + "\n");
             Scanner scan = new Scanner(System.in);
             System.out.println("Would you like to '1' ATTACK, '2' Use your SPECIAL ABILITY, '3' use a potion, or '4' FLEE?");
             String answ = scan.next();
@@ -203,8 +194,7 @@ public class Game {
                             player.increaseStamina(5);
                             player.getInv().consumeSPotion();
                         }
-                    }
-                    else if (answer.equals("h")) {
+                    } else if (answer.equals("h")) {
                         if (player.getInv().getHealthPotionsAmt() > 0) {
                             player.increaseHp(5);
                             player.getInv().consumeHPotion();
@@ -218,15 +208,15 @@ public class Game {
                 default:
                     System.out.println("That's not an option :/");
             }
-            if (getEnemy() instanceof Zombie){
-                if (((Zombie) getEnemy()).isHasBitten() == true){
+            if (getEnemy() instanceof Zombie) {
+                if (((Zombie) getEnemy()).isHasBitten() == true) {
                     player.setAttackDamage(player.getAttackDamage() + 1);
                     ((Zombie) getEnemy()).setHasBitten();
                 }
             }
             if (!enemy.isAlive()) {
                 levelUpCount++;
-                System.out.println(enemy.getName()+" has been defeated!\n");
+                System.out.println(enemy.getName() + " has been defeated!\n");
 
                 if (enemy instanceof Boss) {
                     System.out.println("After hours of battling monsters you see a dark tunnel with a red lantern next \n" +
@@ -245,32 +235,31 @@ public class Game {
                             "                            \\____   (  <_> )  |  /  \\        /|  |   |  \\                          \n" +
                             "                            / ______|\\____/|____/    \\__/\\  / |__|___|  /                          \n" +
                             "                            \\/                            \\/          \\/                           ");
+                    scan.close();
                     exit(0);
                 }
                 collectPotions(player, enemy);
                 player.getRoom().removeEnemy(enemy);
                 System.out.println(enemy.getName() + " dropped " + enemy.getInv().getWeapon().getName() + " with damage of " + enemy.getInv().getWeapon().getDamage() + "\n" +
-                        "do you want to swap for current weapon: " + player.getInv().getWeapon().getName() +" with damage of " + player.getInv().getWeapon().getDamage() +": y/n ?");
+                        "do you want to swap for current weapon: " + player.getInv().getWeapon().getName() + " with damage of " + player.getInv().getWeapon().getDamage() + ": y/n ?");
                 String answ2 = scan.next();
-                if (answ2.equals("y")){
+                if (answ2.equals("y")) {
                     player.getInv().swapWeapon(enemy.getInv().getWeapon());
                 }
 
                 if (levelUpCount >= 2) {
                     levelUpCount = 0;
                     player.levelUp();
-                    System.out.println("You have leveled up! You are now level "+player.getLevel());
+                    System.out.println("You have leveled up! You are now level " + player.getLevel());
                 }
                 break;
-            }
-            else {
-                  int num = rand.nextInt(10);
-                  if (num < 4) {
-                      enemy.specialAttack(player);
-                  }
-                  else {
-                      enemy.attack(player);
-                  }
+            } else {
+                int num = rand.nextInt(10);
+                if (num < 4) {
+                    enemy.specialAttack(player);
+                } else {
+                    enemy.attack(player);
+                }
             }
 
         }
@@ -294,8 +283,8 @@ public class Game {
 
     }
 
-    private static String help(){
-        String h = "Warrior class: this class starts with all around \n " +
+    private static String help() {
+        String h = "Warrior class: this class starts with all around \n" +
                 "great stats to begin, good damage, good health, and good stamina, its unltimate \n" +
                 "ability is 'Berserker Rage' which makes the player deal more dmg the lower their health \n" +
                 "is. \n \n" +
@@ -303,12 +292,11 @@ public class Game {
                 "out a lot of damage but it comes at the cost of little health. Mages ultimate ability is \n" +
                 "'Grand Heal' which fully replenishes their hp and stamina. \n \n" +
                 "Tank class: this class is a high health class, low damage, low stamina, the tank can \n" +
-                "take a ton of hits before it goes down. The starting hp of the tank class is much higher \n " +
+                "take a ton of hits before it goes down. The starting hp of the tank class is much higher \n" +
                 "than the other two. Tanks ultimate abailty is 'Super Armor' which temporarily grants the \n" +
                 "player twice the normal health \n";
         return h;
     }
-
 
 
     public static void main(String[] args) throws UnsupportedAudioFileException, IOException, LineUnavailableException {

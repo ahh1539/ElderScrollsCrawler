@@ -3,6 +3,7 @@ package Dungeon;
 import Enemies.*;
 import Game.Inventory;
 import Game.Weapon;
+
 import java.util.Random;
 
 import java.util.ArrayList;
@@ -17,7 +18,7 @@ public class Room {
     private Random rand = new Random();
     private int n = rand.nextInt(13);
 
-    public Room(int id){
+    public Room(int id) {
 
         //this.doors = doors;
         this.id = id;
@@ -29,9 +30,15 @@ public class Room {
         return rinv;
     }
 
-    private Weapon makeWeapon(){
+    /**
+     * makes a random weapon using a random number generator
+     * there are currently 12 different weapons
+     *
+     * @return weapon object
+     */
+    private Weapon makeWeapon() {
         Weapon w;
-        switch (n){
+        switch (n) {
             case 0:
                 w = new Weapon("Chillrend", 2);
                 break;
@@ -77,14 +84,16 @@ public class Room {
         return w;
     }
 
-    private void makeRoomInventory(){
+    /**
+     * makes a randomized inventory for this room
+     */
+    private void makeRoomInventory() {
         Weapon w;
         int healthPotion = 0;
         int stamPotion = 0;
-        if (n % 2 == 0){
+        if (n % 2 == 0) {
             healthPotion++;
-        }
-        else{
+        } else {
             stamPotion++;
         }
 
@@ -92,57 +101,68 @@ public class Room {
         rinv = new Inventory(stamPotion, healthPotion, w);
     }
 
-
-    private Inventory makeEnemyInventory(){
+    /**
+     * this method makes a randomized inventory for each enemy made
+     *
+     * @return a randomized inventory obj
+     */
+    private Inventory makeEnemyInventory() {
 
         Weapon w;
         int h = 0;
         int s = 0;
 
-        if (n % 3 == 0){
+        if (n % 3 == 0) {
             h++;
-        }
-        else{
+        } else {
             s++;
         }
         w = makeWeapon();
         return new Inventory(s, h, w);
     }
 
-    private void makeEnemy(){
+    /**
+     * Makes a random enemy and creates their inventory and then places
+     * them in the current room
+     */
+    private void makeEnemy() {
         Random rand = new Random();
         int n = rand.nextInt(4);
         Enemy enemy;
-        switch (n){
+        switch (n) {
             case 0:
-                enemy = new Ghoul(makeEnemyInventory(),3,1,10, this);
+                enemy = new Ghoul(makeEnemyInventory(), 3, 1, 10, this);
                 break;
             case 1:
-                enemy = new Ogre(makeEnemyInventory(),4,1, 12, this);
+                enemy = new Ogre(makeEnemyInventory(), 4, 1, 12, this);
                 break;
             case 2:
-                enemy = new Skeleton(makeEnemyInventory(),2, 1, 6, this);
+                enemy = new Skeleton(makeEnemyInventory(), 2, 1, 6, this);
                 break;
             case 3:
-                enemy = new Zombie(makeEnemyInventory(), 2,1, 9, this);
+                enemy = new Zombie(makeEnemyInventory(), 2, 1, 9, this);
                 break;
             default:
-                enemy = new Zombie(makeEnemyInventory(), 2,1, 9, this);
+                enemy = new Zombie(makeEnemyInventory(), 2, 1, 9, this);
         }
 
         enemies.add(enemy);
 
     }
 
-    public ArrayList<Enemy> getEnemies(){
+    public ArrayList<Enemy> getEnemies() {
         return enemies;
     }
 
-    public int getId(){
+    public int getId() {
         return id;
     }
 
-    public boolean isRoomCleared(){
+    /**
+     * checks whether the player has defeated all enemies in the room
+     * @returns a boolean
+     */
+    public boolean isRoomCleared() {
         boolean cleared = false;
         for (Enemy e : enemies) {
             cleared = !e.isAlive();
@@ -151,12 +171,15 @@ public class Room {
     }
 
 
-    public void removeEnemy(Enemy enemy){
+    public void removeEnemy(Enemy enemy) {
         enemies.remove(enemy);
     }
 
+    /**
+     * creates an instance of a boss
+     */
     public void makeBoss() {
-        Enemy boss = new Boss(makeEnemyInventory(),4,2,21, this, "The ClappMaster");
+        Enemy boss = new Boss(makeEnemyInventory(), 4, 2, 21, this, "The ClappMaster");
         enemies.add(boss);
     }
 }

@@ -1,6 +1,5 @@
 package Dungeon;
 
-import java.util.ArrayList;
 
 public class Dungeon {
     private int size = 3;
@@ -14,6 +13,10 @@ public class Dungeon {
 
     }
 
+    /**
+     * creates the dungeon of a set size rooms
+     * @param size the number of rooms in the dungeon
+     */
     public void makeDungeon(int size){
         for (int i = 0; i < size; i++){
             rooms[i] = new Room(id);
