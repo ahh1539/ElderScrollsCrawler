@@ -61,7 +61,7 @@ public class Room {
                 w = new Weapon("Brick", 1);
                 break;
             case 7:
-                w = new Weapon("Electic storm Staff", 3);
+                w = new Weapon("Electric storm Staff", 3);
                 break;
             case 8:
                 w = new Weapon("Soul Staff", 2);
@@ -76,10 +76,10 @@ public class Room {
                 w = new Weapon("Putrid Driftwood Staff", 2);
                 break;
             case 12:
-                w = new Weapon("Blind mans cane", 3);
+                w = new Weapon("Blind Man's Cane", 3);
                 break;
             default:
-                w = new Weapon("chillrend", 2);
+                w = new Weapon("Rusty Iron Sword", 2);
         }
         return w;
     }
@@ -113,9 +113,9 @@ public class Room {
         int s = 0;
 
         if (n % 3 == 0) {
-            h++;
-        } else {
             s++;
+        } else {
+            h++;
         }
         w = makeWeapon();
         return new Inventory(s, h, w);
