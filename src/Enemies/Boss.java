@@ -19,8 +19,8 @@ public class Boss extends Enemy {
     @Override
     public void specialAttack(Hero hero) {
         System.out.println(getName()+" uses Ground Pound (he pounds the ground)");
-        setAttackDamage(getAttackDamage()+6);
+        setAttackDamage(getAttackDamage()+5);
         attack(hero);
-        setAttackDamage(getAttackDamage()-6);
+        setAttackDamage(getAttackDamage()-5);
     }
 }

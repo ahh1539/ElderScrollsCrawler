@@ -63,15 +63,16 @@ public class Game {
             System.out.println("Are you ready to begin your adventure! : y/n");
             String answer = scanner.next();
             if (answer.equals("y")) {
-                System.out.println("You wake up dizzy with a note next to you signed 'good luck', you are in a dark \n" +
+                System.out.println("\nYou wake up dizzy with a note next to you signed 'good luck', you are in a dark \n" +
                         "stone room lit only by a single torch, you hear a voice growing louder, Welcome \n" +
                         "to my dungeon " + player.getName() + " I look forward to seeing you getting clapped." +
-                        " You see a " + player.getInv().getWeapon().getName() + "\n"+"you pick it up and begin your journey through " +
-                        "this evil lair \n");
+                        " You see a " + player.getInv().getWeapon().getName() + "\n" + "you pick it up and begin your journey through " +
+                        "this evil lair \n" +
+                        "================================================================================================\n");
                 while (player.isAlive()) {
                     if (!player.getRoom().getEnemies().isEmpty()) {
                         int i = player.getRoomscleared();
-                        if (rooms[i] == rooms[8]) {
+                        if (rooms[i] == rooms[dungeon.getSize() - 1]) {
                             player.getRoom().makeBoss();
                             //playSound();
                             System.out.println("Welcome to my lair " + player.getName());
@@ -89,7 +90,7 @@ public class Game {
                                 System.out.println("You have taken a potion!");
                             } else {
                                 System.out.println("You have no potions, rip guy...");
-                                ;
+
                             }
                         } else {
                             if (player.getRoom().isRoomCleared()) {
@@ -115,6 +116,7 @@ public class Game {
                     } else {
                         player.addCleared();
                         int i = player.getRoomscleared();
+                        System.out.println("\nYou successfully survived another grueling battle, you see a door at the back of the room.");
                         System.out.println("\nSuccessfully cleared room! Ready to move to next room? : y/n");
                         String moveRoom = scanner.next();
                         Room[] rooms = dungeon.getRooms();
@@ -131,7 +133,7 @@ public class Game {
     }
 
     private static Hero makeHero(String name, String heroType) {
-        dungeon = new Dungeon();
+        dungeon = new Dungeon(9);
         Hero player;
         Weapon weapon = new Weapon("Brick", 1);
         Inventory startInv = new Inventory(1, 1, weapon);
@@ -198,6 +200,7 @@ public class Game {
                         if (player.getInv().getHealthPotionsAmt() > 0) {
                             player.increaseHp(5);
                             player.getInv().consumeHPotion();
+                            System.out.println("You used a potion. Your current health is " + player.getCurrentHp());
                         }
                     }
                     System.out.println();
@@ -245,12 +248,13 @@ public class Game {
                 String answ2 = scan.next();
                 if (answ2.equals("y")) {
                     player.getInv().swapWeapon(enemy.getInv().getWeapon());
+                    System.out.println("You swapped for " + player.getInv().getWeapon().getName()+"\n");
                 }
 
                 if (levelUpCount >= 2) {
                     levelUpCount = 0;
                     player.levelUp();
-                    System.out.println("You have leveled up! You are now level " + player.getLevel());
+                    System.out.println("You have leveled up! You are now level " + player.getLevel() + "\n your health and stamina have been replenished");
                 }
                 break;
             } else {
@@ -284,8 +288,9 @@ public class Game {
     }
 
     private static String help() {
-        String h = "Warrior class: this class starts with all around \n" +
-                "great stats to begin, good damage, good health, and good stamina, its unltimate \n" +
+        String h = "\n======================================================================================================= \n" +
+                "Warrior class: this class starts with all around \n" +
+                "great stats to begin, good damage, good health, and good stamina, its ultimate \n" +
                 "ability is 'Berserker Rage' which makes the player deal more dmg the lower their health \n" +
                 "is. \n \n" +
                 "Mage class: this class is a high damage, high stamina, low health class, mages dish \n" +
@@ -293,8 +298,9 @@ public class Game {
                 "'Grand Heal' which fully replenishes their hp and stamina. \n \n" +
                 "Tank class: this class is a high health class, low damage, low stamina, the tank can \n" +
                 "take a ton of hits before it goes down. The starting hp of the tank class is much higher \n" +
-                "than the other two. Tanks ultimate abailty is 'Super Armor' which temporarily grants the \n" +
-                "player twice the normal health \n";
+                "than the other two. Tanks ultimate ability is 'Super Armor' which temporarily grants the \n" +
+                "player twice the normal health \n" +
+                "=======================================================================================================\n";
         return h;
     }
 

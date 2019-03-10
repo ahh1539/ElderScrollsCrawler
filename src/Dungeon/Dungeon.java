@@ -2,16 +2,18 @@ package Dungeon;
 
 
 public class Dungeon {
-    private int size = 3;
+    private int size;
     int id = 0;
     //int counter = -1;
     //private ArrayList<Room> roomz;
     private Room[] rooms = new Room[9];
 
-    public Dungeon(){
+    public Dungeon(int size){
+        this.size = size;
         makeDungeon(size);
-
     }
+
+    //TODO Refactor using arraylist
 
     /**
      * creates the dungeon of a set size rooms
@@ -21,6 +23,10 @@ public class Dungeon {
         for (int i = 0; i < size; i++){
             rooms[i] = new Room(id);
         }
+    }
+
+    public int getSize(){
+        return size;
     }
 
 

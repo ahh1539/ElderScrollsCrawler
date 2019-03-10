@@ -5,6 +5,8 @@ import Enemies.Enemy;
 import Game.Creature;
 import Game.Inventory;
 
+import java.util.Random;
+
 public abstract class Hero extends Creature {
 
     private int maxStamina;
@@ -21,7 +23,20 @@ public abstract class Hero extends Creature {
     public abstract void ability();
 
     public void slash(Enemy enemy) {
-        enemy.decreaseHp(super.getAttackDamage()+getInv().getWeapon().getDamage());
+        int attackDmg = super.getAttackDamage()+getInv().getWeapon().getDamage();
+        Random rand = new Random();
+        int n = rand.nextInt(11);
+        if (n == 10){
+            System.out.println("You attacked but missed!");
+        }
+        else if (n > 2){
+            System.out.println("You hit enemy for " + attackDmg + " damage!");
+            enemy.decreaseHp(attackDmg);
+        }
+        else {
+            System.out.println("You delt a staggering blow to " + enemy.getName() + " for " + (attackDmg+1) + "damage!");
+            enemy.decreaseHp(attackDmg + 1);
+        }
         decreaseStamina(2);
     }
 
