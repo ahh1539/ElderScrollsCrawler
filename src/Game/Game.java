@@ -3,19 +3,23 @@ package Game;
 import Dungeon.*;
 import Enemies.*;
 import Hero.*;
-//import javafx.embed.swing.JFXPanel;
-//import javafx.scene.media.Media;
-//import javafx.scene.media.MediaPlayer;
+
+import javafx.embed.swing.JFXPanel;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import java.io.File;
+import static java.lang.System.setOut;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-import java.io.File;
+import javax.swing.*;
+import java.awt.*;
+
 import java.io.IOException;
 import java.util.Random;
 import java.util.Scanner;
-
 import static java.lang.System.exit;
-import static java.lang.System.setOut;
+
 
 public class Game {
 
@@ -29,7 +33,10 @@ public class Game {
     public static void play() {
         Scanner scanner = new Scanner(System.in);
 
-//
+        GUI gui = new GUI();
+
+        gui.MakeGUI();
+
         System.out.println("___________.__       .___               _________                   .__  .__           _________                      .__                \n" +
                 "\\_   _____/|  |    __| _/___________   /   _____/ ___________  ____ |  | |  |   ______ \\_   ___ \\____________ __  _  _|  |   ___________ \n" +
                 " |    __)_ |  |   / __ |/ __ \\_  __ \\  \\_____  \\_/ ___\\_  __ \\/  _ \\|  | |  |  /  ___/ /    \\  \\/\\_  __ \\__  \\\\ \\/ \\/ /  | _/ __ \\_  __ \\\n" +
