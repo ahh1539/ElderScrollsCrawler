@@ -2,18 +2,11 @@ package Game;
 
 import Dungeon.*;
 import Enemies.*;
+import GUI.GUI;
 import Hero.*;
-
-import javafx.embed.swing.JFXPanel;
-import javafx.scene.media.Media;
-import javafx.scene.media.MediaPlayer;
-import java.io.File;
-import static java.lang.System.setOut;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-import javax.swing.*;
-import java.awt.*;
 
 import java.io.IOException;
 import java.util.Random;

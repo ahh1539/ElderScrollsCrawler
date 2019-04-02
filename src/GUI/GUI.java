@@ -1,4 +1,4 @@
-package Game;
+package GUI;
 
 import javax.swing.*;
 import java.awt.*;
@@ -9,7 +9,8 @@ public class GUI {
     private JPanel title, startButton;
     private JButton button;
     private JLabel label;
-    Font titlefont = new Font("Times New Roman", Font.PLAIN,32);
+    Font titlefont = new Font("Times New Roman", Font.PLAIN,40);
+    Font normalFont = new Font("Times New Roman", Font.PLAIN,20);
 
     public GUI(){
 
@@ -18,7 +19,7 @@ public class GUI {
     public void MakeGUI() {
 
         window = new JFrame();
-        window.setSize(800, 600);
+        window.setSize(850, 650);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         window.getContentPane().setBackground(Color.BLACK);
         window.setLayout(null);
@@ -28,7 +29,7 @@ public class GUI {
         title = new JPanel();
         title.setBounds(100, 100, 600, 150);
         title.setBackground(Color.black);
-        cont.add(title);
+
 
         label = new JLabel("Welcome to Elder Scrolls Crawler!");
         label.setForeground(Color.white);
@@ -39,13 +40,17 @@ public class GUI {
 
         startButton = new JPanel();
         startButton.setBounds(300,400,200,100);
-        startButton.setBackground(Color.blue);
+        startButton.setBackground(Color.black);
 
-        button = new JButton("START GAME");
+        button = new JButton("START");
         button.setBackground(Color.black);
         button.setForeground(Color.white);
+        button.setFont(normalFont);
 
+
+        title.add(label);
         startButton.add(button);
+        cont.add(title);
         cont.add(startButton);
 
     }
