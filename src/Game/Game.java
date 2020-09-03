@@ -9,8 +9,11 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 import java.io.IOException;
+import java.util.HashSet;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Set;
+
 import static java.lang.System.exit;
 
 
@@ -26,9 +29,7 @@ public class Game {
     public static void play() {
         Scanner scanner = new Scanner(System.in);
 
-        GUI gui = new GUI();
 
-        gui.MakeGUI();
 
         System.out.println("___________.__       .___               _________                   .__  .__           _________                      .__                \n" +
                 "\\_   _____/|  |    __| _/___________   /   _____/ ___________  ____ |  | |  |   ______ \\_   ___ \\____________ __  _  _|  |   ___________ \n" +
@@ -77,7 +78,7 @@ public class Game {
                             //playSound();
                             System.out.println("Welcome to my lair " + player.getName());
                         }
-                        System.out.println("You see a " + getEnemy().getName() + " enter 'f' to fight, 'w' to wait, or 'p' to " +
+                        System.out.println("You see a " + getEnemy().getName() + " enter 'f' to fight, 'w' to wait, 'i' for inventory , or 'p' to " +
                                 "take potion!");
                         String ans = scanner.next();
 
@@ -92,6 +93,10 @@ public class Game {
                                 System.out.println("You have no potions, rip guy...");
 
                             }
+                        } else if (ans.equals("i")) {
+                            System.out.println("Weapon: " + "[" + player.getInv().getWeapon().getName() + ": " + player.getInv().getWeapon().getDamage()
+                                    + "]" + "\n" + "Health Potions: " + player.getInv().getHealthPotionsAmt()
+                                    + "\n" +"Stamina Potions: " + player.getInv().getStamPotionsAmt() + "\n");
                         } else {
                             if (player.getRoom().isRoomCleared()) {
                                 System.out.println("Would you like to continue (c) or go back (b)?");
@@ -254,7 +259,7 @@ public class Game {
                 if (levelUpCount >= 2) {
                     levelUpCount = 0;
                     player.levelUp();
-                    System.out.println("You have leveled up! You are now level " + player.getLevel() + "\n your health and stamina have been replenished");
+                    System.out.println("You have leveled up! You are now level " + player.getLevel() + "\nyour health and stamina have been replenished");
                 }
                 break;
             } else {

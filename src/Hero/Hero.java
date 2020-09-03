@@ -34,7 +34,7 @@ public abstract class Hero extends Creature {
             enemy.decreaseHp(attackDmg);
         }
         else {
-            System.out.println("You delt a staggering blow to " + enemy.getName() + " for " + (attackDmg+1) + "damage!");
+            System.out.println("You delt a staggering blow to " + enemy.getName() + " for " + (attackDmg+1) + " damage!");
             enemy.decreaseHp(attackDmg + 1);
         }
         decreaseStamina(2);
