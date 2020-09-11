@@ -9,14 +9,19 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.Set;
+import java.util.Arrays;
 
 import static java.lang.System.exit;
 
 
+/**
+ * TODO
+ * - add in enemy levels other than level 1 (make dependent on player level)
+ * - add armor
+ * - add options to maybe explore the room
+ */
 public class Game {
 
     private static Dungeon dungeon;
@@ -113,7 +118,7 @@ public class Game {
                                 }
                             }
                             if (player.getRoom().isRoomCleared() == false) {
-                                System.out.println("You can't progress to the next room without clearing this room!)");
+                                System.out.println("You can't progress to the next room without clearing this room!");
                             }
 
                         }
@@ -171,10 +176,20 @@ public class Game {
             System.out.println();
             System.out.println();
             if (!player.isAlive()) {
-                System.out.println("YOU HAVE DIED.......BETTER LUCK NEXT TIME!!!");
-                break;
+                System.out.println("YOU HAVE DIED.......BETTER LUCK NEXT TIME!!!" + "\n" + "play again? (y/n)");
+                Scanner scan = new Scanner(System.in);
+                String playAgain = scan.nextLine();
+                if (playAgain.equals("y")){
+                    play();
+                } else {
+                    break;
+                }
             }
-            System.out.println("Health: " + player.getCurrentHp() + "/" + player.getMaxHp() + "\n" +
+            System.out.printf("%1s %40s", "You:", "Enemy:" + "\n");
+            System.out.printf("%1s", "Health: " + player.getCurrentHp());
+            System.out.printf("%38s", "Health: " + getEnemy().getCurrentHp() +"\n");
+
+            System.out.println(
                     "Stamina: " + player.getCurrentStamina() + "/" + player.getMaxStamina() + "\n" +
                     "Attack Damage: " + player.getAttackDamage() + "\n" +
                     "Weapon: " + player.getInv().getWeapon().getName() + " : " + player.getInv().getWeapon().getDamage() + "\n" +
@@ -182,39 +197,45 @@ public class Game {
                     "Health Potions: " + player.getInv().getHealthPotionsAmt() + "\n" +
                     "Level: " + player.getLevel() + "\n");
             Scanner scan = new Scanner(System.in);
-            System.out.println("Would you like to '1' ATTACK, '2' Use your SPECIAL ABILITY, '3' use a potion, or '4' FLEE?");
-            String answ = scan.next();
 
-            //player interaction
-            switch (answ) {
-                case "1":
-                    player.slash(enemy);
-                    break;
-                case "2":
-                    player.ability();
-                    break;
-                case "3":
-                    System.out.println("Use Stamina (s) or Health (h) potions?");
-                    String answer = scan.next();
-                    if (answer.equals("s")) {
-                        if (player.getInv().getStamPotionsAmt() > 0) {
-                            player.increaseStamina(5);
-                            player.getInv().consumeSPotion();
+            String answ = null;
+            String[] validAnswers = {"1","2","3","4"};
+
+            while(!Arrays.asList(validAnswers).contains(answ)) {
+                System.out.println("Would you like to '1' ATTACK, '2' Use your SPECIAL ABILITY, '3' use a potion, or '4' FLEE?");
+                answ = scan.next();
+
+                //player interaction
+                switch (answ) {
+                    case "1":
+                        player.slash(enemy);
+                        break;
+                    case "2":
+                        player.ability();
+                        break;
+                    case "3":
+                        System.out.println("Use Stamina (s) or Health (h) potions?");
+                        String answer = scan.next();
+                        if (answer.equals("s")) {
+                            if (player.getInv().getStamPotionsAmt() > 0) {
+                                player.increaseStamina(5);
+                                player.getInv().consumeSPotion();
+                            }
+                        } else if (answer.equals("h")) {
+                            if (player.getInv().getHealthPotionsAmt() > 0) {
+                                player.increaseHp(5);
+                                player.getInv().consumeHPotion();
+                                System.out.println("You used a potion. Your current health is " + player.getCurrentHp());
+                            }
                         }
-                    } else if (answer.equals("h")) {
-                        if (player.getInv().getHealthPotionsAmt() > 0) {
-                            player.increaseHp(5);
-                            player.getInv().consumeHPotion();
-                            System.out.println("You used a potion. Your current health is " + player.getCurrentHp());
-                        }
-                    }
-                    System.out.println();
-                    break;
-                case "4":
-                    System.out.println("Ending Battle!....for now");
-                    break label;
-                default:
-                    System.out.println("That's not an option :/");
+                        System.out.println();
+                        break;
+                    case "4":
+                        System.out.println("Ending Battle!....for now");
+                        break label;
+                    default:
+                        System.out.println("That's not a valid option!!");
+                }
             }
             if (getEnemy() instanceof Zombie) {
                 if (((Zombie) getEnemy()).isHasBitten() == true) {
@@ -311,7 +332,7 @@ public class Game {
 
 
     public static void main(String[] args) throws UnsupportedAudioFileException, IOException, LineUnavailableException {
-        //final JFXPanel fxPanel = new JFXPanel();
+//        final JFXPanel fxPanel = new JFXPanel();
         play();
     }
 

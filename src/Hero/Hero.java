@@ -30,7 +30,7 @@ public abstract class Hero extends Creature {
             System.out.println("You attacked but missed!");
         }
         else if (n > 2){
-            System.out.println("You hit enemy for " + attackDmg + " damage!");
+            System.out.println("You hit " + enemy.getName() + " for " + attackDmg + " damage!");
             enemy.decreaseHp(attackDmg);
         }
         else {
