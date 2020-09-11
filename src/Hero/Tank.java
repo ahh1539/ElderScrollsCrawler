@@ -14,7 +14,7 @@ public class Tank extends Hero {
         SHIELD_MULTIPLIER = super.getMaxHp();
     }
 
-    public void reset(){
+    public void reset() {
         if (superArmorUsed) {
             setMaxHp(SHIELD_MULTIPLIER);
             increaseHp(0);
@@ -24,12 +24,11 @@ public class Tank extends Hero {
 
     @Override
     public void ability() {
-        if (superArmorUsed){
+        if (superArmorUsed) {
             System.out.println("Superarmor has already been used this round");
-        }
-        else {
+        } else {
             System.out.println("Super Armor Enabled, clap them solider!");
-            super.setMaxHp(SHIELD_MULTIPLIER*2);
+            super.setMaxHp(SHIELD_MULTIPLIER * 2);
             super.increaseHp(SHIELD_MULTIPLIER);
             superArmorUsed = true;
         }

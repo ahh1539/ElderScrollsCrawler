@@ -3,7 +3,7 @@ package Enemies;
 import Dungeon.Room;
 import Game.Creature;
 import Game.Inventory;
-import Hero.*;
+import Hero.Hero;
 
 public abstract class Enemy extends Creature {
 
@@ -17,7 +17,7 @@ public abstract class Enemy extends Creature {
 
     public void attack(Hero hero) {
         System.out.println();
-        System.out.println(getName()+" has attacked you, you took "+getAttackDamage()+" damage!");
+        System.out.println(getName() + " has attacked you, you took " + getAttackDamage() + " damage!");
         hero.decreaseHp(getAttackDamage());
 
     }

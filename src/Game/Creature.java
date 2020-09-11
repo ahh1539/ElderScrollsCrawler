@@ -46,10 +46,9 @@ public class Creature {
     }
 
     public void increaseHp(int amt) {
-        if (currentHp + amt> maxHp) {
+        if (currentHp + amt > maxHp) {
             currentHp = maxHp;
-        }
-        else {
+        } else {
             this.currentHp += amt;
         }
     }
@@ -57,8 +56,7 @@ public class Creature {
     public void decreaseHp(int amt) {
         if (currentHp - amt < 0) {
             currentHp = 0;
-        }
-        else {
+        } else {
             currentHp -= amt;
         }
     }
@@ -79,7 +77,9 @@ public class Creature {
         return currentHp > 0;
     }
 
-    public Room getRoom(){ return room; }
+    public Room getRoom() {
+        return room;
+    }
 
     public void setRoom(Room room) {
         this.room = room;

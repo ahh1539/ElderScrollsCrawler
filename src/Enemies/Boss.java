@@ -14,13 +14,14 @@ public class Boss extends Enemy {
     /**
      * the bosses special attack, here it is called ground pound
      * this attack does much more damage than a regular attack
+     *
      * @param hero this is the hero that the boss is attacking
      */
     @Override
     public void specialAttack(Hero hero) {
-        System.out.println(getName()+" uses Ground Pound (he pounds the ground)");
-        setAttackDamage(getAttackDamage()+5);
+        System.out.println(getName() + " uses Ground Pound (he pounds the ground)");
+        setAttackDamage(getAttackDamage() + 5);
         attack(hero);
-        setAttackDamage(getAttackDamage()-5);
+        setAttackDamage(getAttackDamage() - 5);
     }
 }

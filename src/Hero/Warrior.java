@@ -25,10 +25,9 @@ public class Warrior extends Hero {
     public void ability() {
         if (berserkUsed) {
             System.out.println("Berserk mode has already been used this round");
-        }
-        else {
+        } else {
             System.out.println("Berserk mode activated!");
-            setAttackDamage(getAttackDamage() + (int)((getMaxHp()-getCurrentHp()/getMaxHp())*ABILITY_LIMITER));
+            setAttackDamage(getAttackDamage() + (int) ((getMaxHp() - getCurrentHp() / getMaxHp()) * ABILITY_LIMITER));
             berserkUsed = true;
         }
     }

@@ -11,10 +11,10 @@ public class GUI {
     private JLabel label;
     private JTextArea mainTextArea;
     private TitleScreenHandler tsHandler = new TitleScreenHandler(this);
-    public final Font titlefont = new Font("Times New Roman", Font.PLAIN,40);
-    public final Font normalFont = new Font("Times New Roman", Font.PLAIN,20);
+    public final Font titlefont = new Font("Times New Roman", Font.PLAIN, 40);
+    public final Font normalFont = new Font("Times New Roman", Font.PLAIN, 20);
 
-    public GUI(){
+    public GUI() {
 
     }
 
@@ -41,7 +41,7 @@ public class GUI {
         cont.add(title);
 
         startButton = new JPanel();
-        startButton.setBounds(300,400,200,100);
+        startButton.setBounds(300, 400, 200, 100);
         startButton.setBackground(Color.black);
 
         button = new JButton("START");
@@ -58,7 +58,7 @@ public class GUI {
 
     }
 
-    public void makeFightScene(){
+    public void makeFightScene() {
 
         title.setVisible(false);
         startButton.setVisible(false);

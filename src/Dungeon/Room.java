@@ -4,9 +4,8 @@ import Enemies.*;
 import Game.Inventory;
 import Game.Weapon;
 
-import java.util.Random;
-
 import java.util.ArrayList;
+import java.util.Random;
 
 public class Room {
 
@@ -160,6 +159,7 @@ public class Room {
 
     /**
      * checks whether the player has defeated all enemies in the room
+     *
      * @returns a boolean
      */
     public boolean isRoomCleared() {

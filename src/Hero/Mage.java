@@ -22,8 +22,7 @@ public class Mage extends Hero {
     public void ability() {
         if (usedAbility) {
             System.out.println("Grand Heal has already been used this round!");
-        }
-        else {
+        } else {
             System.out.println("You used Grand Heal!");
             increaseStamina(100);
             increaseHp(100);

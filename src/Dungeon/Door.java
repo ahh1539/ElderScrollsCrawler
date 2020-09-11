@@ -4,7 +4,7 @@ package Dungeon;
 public class Door {
 
     private boolean canPass;
-    private Room rooms[];
+    private Room[] rooms;
 
     public Door(boolean canpass, Room room1, Room room2) {
         this.canPass = canpass;

@@ -1,17 +1,21 @@
 package Game;
 
-import Dungeon.*;
-import Enemies.*;
-import GUI.GUI;
-import Hero.*;
+import Dungeon.Dungeon;
+import Dungeon.Room;
+import Enemies.Boss;
+import Enemies.Enemy;
+import Enemies.Zombie;
+import Hero.Hero;
+import Hero.Mage;
+import Hero.Tank;
+import Hero.Warrior;
 
 import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
-
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.Random;
 import java.util.Scanner;
-import java.util.Arrays;
 
 import static java.lang.System.exit;
 
@@ -33,7 +37,6 @@ public class Game {
 
     public static void play() {
         Scanner scanner = new Scanner(System.in);
-
 
 
         System.out.println("___________.__       .___               _________                   .__  .__           _________                      .__                \n" +
@@ -101,7 +104,7 @@ public class Game {
                         } else if (ans.equals("i")) {
                             System.out.println("Weapon: " + "[" + player.getInv().getWeapon().getName() + ": " + player.getInv().getWeapon().getDamage()
                                     + "]" + "\n" + "Health Potions: " + player.getInv().getHealthPotionsAmt()
-                                    + "\n" +"Stamina Potions: " + player.getInv().getStamPotionsAmt() + "\n");
+                                    + "\n" + "Stamina Potions: " + player.getInv().getStamPotionsAmt() + "\n");
                         } else {
                             if (player.getRoom().isRoomCleared()) {
                                 System.out.println("Would you like to continue (c) or go back (b)?");
@@ -179,7 +182,7 @@ public class Game {
                 System.out.println("YOU HAVE DIED.......BETTER LUCK NEXT TIME!!!" + "\n" + "play again? (y/n)");
                 Scanner scan = new Scanner(System.in);
                 String playAgain = scan.nextLine();
-                if (playAgain.equals("y")){
+                if (playAgain.equals("y")) {
                     play();
                 } else {
                     break;
@@ -187,21 +190,21 @@ public class Game {
             }
             System.out.printf("%1s %40s", "You:", "Enemy:" + "\n");
             System.out.printf("%1s", "Health: " + player.getCurrentHp());
-            System.out.printf("%38s", "Health: " + getEnemy().getCurrentHp() +"\n");
+            System.out.printf("%38s", "Health: " + getEnemy().getCurrentHp() + "\n");
 
             System.out.println(
                     "Stamina: " + player.getCurrentStamina() + "/" + player.getMaxStamina() + "\n" +
-                    "Attack Damage: " + player.getAttackDamage() + "\n" +
-                    "Weapon: " + player.getInv().getWeapon().getName() + " : " + player.getInv().getWeapon().getDamage() + "\n" +
-                    "Stamina Potions: " + player.getInv().getStamPotionsAmt() + "\n" +
-                    "Health Potions: " + player.getInv().getHealthPotionsAmt() + "\n" +
-                    "Level: " + player.getLevel() + "\n");
+                            "Attack Damage: " + player.getAttackDamage() + "\n" +
+                            "Weapon: " + player.getInv().getWeapon().getName() + " : " + player.getInv().getWeapon().getDamage() + "\n" +
+                            "Stamina Potions: " + player.getInv().getStamPotionsAmt() + "\n" +
+                            "Health Potions: " + player.getInv().getHealthPotionsAmt() + "\n" +
+                            "Level: " + player.getLevel() + "\n");
             Scanner scan = new Scanner(System.in);
 
             String answ = null;
-            String[] validAnswers = {"1","2","3","4"};
+            String[] validAnswers = {"1", "2", "3", "4"};
 
-            while(!Arrays.asList(validAnswers).contains(answ)) {
+            while (!Arrays.asList(validAnswers).contains(answ)) {
                 System.out.println("Would you like to '1' ATTACK, '2' Use your SPECIAL ABILITY, '3' use a potion, or '4' FLEE?");
                 answ = scan.next();
 
@@ -274,7 +277,7 @@ public class Game {
                 String answ2 = scan.next();
                 if (answ2.equals("y")) {
                     player.getInv().swapWeapon(enemy.getInv().getWeapon());
-                    System.out.println("You swapped for " + player.getInv().getWeapon().getName()+"\n");
+                    System.out.println("You swapped for " + player.getInv().getWeapon().getName() + "\n");
                 }
 
                 if (levelUpCount >= 2) {

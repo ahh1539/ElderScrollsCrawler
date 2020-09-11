@@ -2,7 +2,8 @@ package Enemies;
 
 import Dungeon.Room;
 import Game.Inventory;
-import Hero.*;
+import Hero.Hero;
+import Hero.Mage;
 
 public class Ogre extends Enemy {
 

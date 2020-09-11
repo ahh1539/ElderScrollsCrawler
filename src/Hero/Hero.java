@@ -23,18 +23,16 @@ public abstract class Hero extends Creature {
     public abstract void ability();
 
     public void slash(Enemy enemy) {
-        int attackDmg = super.getAttackDamage()+getInv().getWeapon().getDamage();
+        int attackDmg = super.getAttackDamage() + getInv().getWeapon().getDamage();
         Random rand = new Random();
         int n = rand.nextInt(11);
-        if (n == 10){
+        if (n == 10) {
             System.out.println("You attacked but missed!");
-        }
-        else if (n > 2){
+        } else if (n > 2) {
             System.out.println("You hit " + enemy.getName() + " for " + attackDmg + " damage!");
             enemy.decreaseHp(attackDmg);
-        }
-        else {
-            System.out.println("You delt a staggering blow to " + enemy.getName() + " for " + (attackDmg+1) + " damage!");
+        } else {
+            System.out.println("You delt a staggering blow to " + enemy.getName() + " for " + (attackDmg + 1) + " damage!");
             enemy.decreaseHp(attackDmg + 1);
         }
         decreaseStamina(2);
@@ -48,8 +46,7 @@ public abstract class Hero extends Creature {
     public void decreaseStamina(int amt) {
         if (currentStamina - amt < 0) {
             currentStamina = 0;
-        }
-        else {
+        } else {
             currentStamina -= amt;
         }
     }
@@ -65,15 +62,15 @@ public abstract class Hero extends Creature {
     public void increaseStamina(int amt) {
         if (currentStamina + amt > maxStamina) {
             currentStamina = maxStamina;
-        }
-        else {
+        } else {
             currentStamina += amt;
         }
     }
 
-    public void addCleared(){
+    public void addCleared() {
         roomscleared++;
     }
+
     public int getRoomscleared() {
         return roomscleared;
     }
@@ -81,13 +78,12 @@ public abstract class Hero extends Creature {
     public abstract void reset();
 
     public void levelUp() {
-        setLevel(super.getLevel()+1);
-        setMaxStamina(getMaxStamina()+2);
-        setMaxHp(getMaxHp()+2);
+        setLevel(super.getLevel() + 1);
+        setMaxStamina(getMaxStamina() + 2);
+        setMaxHp(getMaxHp() + 2);
         increaseStamina(100);
         increaseHp(100);
     }
-
 
 
 }

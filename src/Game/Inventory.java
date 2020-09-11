@@ -6,18 +6,17 @@ public class Inventory {
     private int healthPotions;
     private Weapon weapon;
 
-    public Inventory(int stamPotions, int healthPotions, Weapon weapon){
+    public Inventory(int stamPotions, int healthPotions, Weapon weapon) {
         this.healthPotions = healthPotions;
         this.stamPotions = stamPotions;
         this.weapon = weapon;
     }
 
-    public boolean consumeHPotion(){
-        if (healthPotions != 0){
-            healthPotions --;
+    public boolean consumeHPotion() {
+        if (healthPotions != 0) {
+            healthPotions--;
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
@@ -30,29 +29,32 @@ public class Inventory {
         return healthPotions;
     }
 
-    public boolean consumeSPotion(){
-        if (stamPotions != 0){
-            stamPotions --;
+    public boolean consumeSPotion() {
+        if (stamPotions != 0) {
+            stamPotions--;
             return true;
-        }
-        else{
+        } else {
             return false;
         }
     }
 
-    public void swapWeapon(Weapon weapon){ this.weapon = weapon; }
+    public void swapWeapon(Weapon weapon) {
+        this.weapon = weapon;
+    }
 
-    public void addHealthP(int num){
+    public void addHealthP(int num) {
         healthPotions += num;
     }
 
-    public void addStamP(int num){
+    public void addStamP(int num) {
         stamPotions += num;
     }
 
-    public Weapon getWeapon() { return weapon; }
+    public Weapon getWeapon() {
+        return weapon;
+    }
 
-    public void addWeapon(Weapon weapon){
+    public void addWeapon(Weapon weapon) {
         this.weapon = weapon;
     }
 

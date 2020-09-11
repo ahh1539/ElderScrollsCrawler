@@ -8,7 +8,7 @@ public class Dungeon {
     //private ArrayList<Room> roomz;
     private Room[] rooms = new Room[9];
 
-    public Dungeon(int size){
+    public Dungeon(int size) {
         this.size = size;
         makeDungeon(size);
     }
@@ -17,18 +17,18 @@ public class Dungeon {
 
     /**
      * creates the dungeon of a set size rooms
+     *
      * @param size the number of rooms in the dungeon
      */
-    public void makeDungeon(int size){
-        for (int i = 0; i < size; i++){
+    public void makeDungeon(int size) {
+        for (int i = 0; i < size; i++) {
             rooms[i] = new Room(id);
         }
     }
 
-    public int getSize(){
+    public int getSize() {
         return size;
     }
-
 
 
 //    public ArrayList<Door> makeDoors(int i){
@@ -99,7 +99,6 @@ public class Dungeon {
         return rooms;
     }
 }
-
 
 
 //        int max_size = size -1;
